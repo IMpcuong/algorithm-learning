@@ -1,1 +1,1 @@
-# Some Leetcode easy difficulty solutions in Golang
+## Grokking algorithms for IMpcuong himself

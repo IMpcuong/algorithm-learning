@@ -1,0 +1,158 @@
+0. Binary search:
+
+- Binary search is an algorithm; its input is a sorted list of elements.
+- Return the location or index of the needed element or else return -1.
+
+```go
+package main
+
+import "fmt"
+
+// Verbose implementation:
+func binary_search_v1(num int, arr []int) int {
+	low := 0
+	high := len(arr) - 1
+
+	for low <= high {
+		mid := (low + high) / 2
+		guess := arr[mid]
+		if guess == num {
+			return mid
+		} else if guess > num {
+			high = mid - 1
+		} else if guess < num {
+			low = mid + 1
+		}
+	}
+	return -1
+}
+
+func binary_search_v2(num int, arr []int) int {
+	low := 0
+	high := len(arr) - 1
+
+	for low <= high {
+		mid := (low + high) / 2
+		guess := arr[mid]
+		if guess > num {
+			high = mid - 1
+		} else if guess < num {
+			low = mid + 1
+		}
+		return mid
+	}
+	return -1
+}
+
+func binary_search_recursive(num, low, high int, arr []int) int {
+	for low <= high {
+		mid := (low + high) / 2
+		guess := arr[mid]
+		if guess > num {
+			binary_search_recursive(num, low, mid-1, arr)
+		}
+		if guess < num {
+			binary_search_recursive(num, mid+1, high, arr)
+		}
+		return mid
+	}
+	return -1
+}
+
+func main() {
+	arr := []int{0, 2, 4, 5, 7, 9, 11, 12, 13, 18}
+	fmt.Println(binary_search_v1(7, arr), arr[4])
+	fmt.Println(binary_search_v2(7, arr), arr[4])
+	fmt.Println(binary_search_recursive(7, 0, len(arr)-1, arr), arr[4])
+}
+```
+
+```c
+#include <stdint.h>
+#include <stdio.h>
+
+uint32_t binary_search(uint32_t num, uint32_t *arr)
+{
+	uint32_t low = 0;
+	uint32_t high = (uint32_t)((sizeof arr) / (sizeof arr[0])) - 1; // FIXME: @@@
+	while (low < high)
+	{
+		uint32_t mid = (low + high) / 2;
+		uint32_t guess = *(arr + mid);
+		if (guess > num)
+			high = mid - 1;
+		if (guess < num)
+			low = mid + 1;
+		return mid;
+	}
+	return 0;
+}
+
+int main(void)
+{
+	uint32_t arr[8] = {0, 2, 6, 7, 8, 9, 10, 12};
+	printf("%d: %d", binary_search(8, arr), arr[4]);
+	return 0;
+}
+```
+
+- In this book: `log_x(n) -> x := 2`.
+- Exercise:
+
+  - 1.1: log_2(128) = log(128) = 7
+  - 1.2: log(128 \* 2) = 8
+
+- BigO notation lets you compare the number of operations. Some examples:
+
+  | BigO           | Stands for        | Example                                       |
+  | -------------- | ----------------- | --------------------------------------------- |
+  | `O(log n)`     | **_log time_**    | Binary search                                 |
+  | `O(n)`         | **_linear time_** | Simple search                                 |
+  | `O(n * log n)` |                   | Quicksort (Fast sorting algorithm)            |
+  | `O(n^2)`       |                   | Selection sort (Slow sorting algorithm)       |
+  | `O(n!)`        |                   | Traveling salesperson (Really slow algorithm) |
+
+- Algorithm speed isn't measured in seconds, but in growth of the number of operation.
+- Instead, we talk about how quickly the runtime of an algorithm increases as the size of the input increases.
+- Runtime of algorithm is expressed in BigO notation.
+- `O(log n)` is faster than `O(n)`, but it gets a lot faster as the list of items you're searching grows.
+
+- Exercise:
+
+  - 1.3: `O(log n)`.
+  - 1.4: `O(n)`.
+  - 1.5: `O(n)`.
+  - 1.6: `O(log (n/26))`.
+
+1. Selection sort:
+
+- Runtime for common operation between arrays and lists:
+
+  - Array: allow random access.
+  - List (Linked lists): allow sequential access.
+
+  |           | Arrays | Lists  |
+  | --------- | ------ | ------ |
+  | Reading   | `O(1)` | `O(n)` |
+  | Insertion | `O(n)` | `O(1)` |
+  | Deletion  | `O(n)` | `O(1)` |
+
+- Exercise:
+
+  - 2.1: List.
+  - 2.2: List.
+  - 2.3: Array.
+  - 2.4: Downside ~ array easy to append, an inappropriate for in-between insertion
+    -> hard to sort -> to serve for binary-search algorithm.
+  - 2.5: Let’s consider a hybrid data structure: an array of linked lists.
+    You have an array with 26 slots. Each slot points to a linked list.
+    For example, the first slot in the array points to a linked list containing all the usernames starting with `a`.
+    The second slot points to a linked list containing all the usernames starting with `b`, and so on.
+    My guess:
+
+    | Hybrid    | Array  | Linked list |
+    | --------- | :----: | :---------: |
+    | Searching | Faster |   Slower    |
+    | Insertion | Slower |   Faster    |
+
+- Time: `Chapter 3: Recursion`; `37 (56 of 258)`.

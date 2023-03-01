@@ -155,4 +155,12 @@ int main(void)
     | Searching | Faster |   Slower    |
     | Insertion | Slower |   Faster    |
 
-- Time: `Chapter 3: Recursion`; `37 (56 of 258)`.
+2. Recursion:
+
+- Quote:
+
+  - Loops may achieve a performance gain for your program.
+  - Recursion may achieve a performance gain for your programmer.
+  - Choose which is more important in your situation!”
+
+- Time: `Chapter 3: Recursion`; `42 (61 of 258)`.

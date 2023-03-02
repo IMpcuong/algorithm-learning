@@ -157,10 +157,22 @@ int main(void)
 
 2. Recursion:
 
-- Quote:
+- Quotes:
 
   - Loops may achieve a performance gain for your program.
   - Recursion may achieve a performance gain for your programmer.
   - Choose which is more important in your situation!”
+
+- Using the stack is convenient because you don't have to keep track of a pile of boxes yourself - the stack does that for you.
+- Using the stack comes at the cost of over-allocating memory. When the stack to tall,
+  that means your computer is saving information for many functions call.
+
+- Recap:
+
+  - Recursion is when a function calls itself.
+  - Every recursive function has `2` cases: the base case and the recursive case.
+  - A stack has `2` operations: `push` and `pop`.
+  - All functions call go onto the `call stack`.
+  - The call stack can get very large, which takes up a lot of memory.
 
 - Time: `Chapter 3: Recursion`; `42 (61 of 258)`.

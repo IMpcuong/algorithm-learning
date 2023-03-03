@@ -175,4 +175,11 @@ int main(void)
   - All functions call go onto the `call stack`.
   - The call stack can get very large, which takes up a lot of memory.
 
-- Time: `Chapter 3: Recursion`; `42 (61 of 258)`.
+3. Divide-and-conquer:
+
+- Recap:
+
+  - Step 1: Figure out simple case as the base case.
+  - Step 2: Figure out how to reduce your problem and get to the base case (recursive case).
+
+- Time: `Chapter 4: Recursion`; `51 (70 of 258)`.

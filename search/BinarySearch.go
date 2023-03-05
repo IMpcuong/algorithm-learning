@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// NOTE: `Binary Search` is a variation of `Divide and Conquer` algorithm.
+
 // Verbose implementation:
 func binarySearchV1(num int, arr []int) int {
 	low := 0
@@ -53,9 +55,24 @@ func binarySearchRecursive(num, low, high int, arr []int) int {
 	return -1
 }
 
+func checkEquals(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		pos := binarySearchV2(a[i], b)
+		if pos == -1 {
+			return false
+		}
+	}
+	return true
+}
+
 func main() {
-	arr := []int{0, 2, 4, 5, 7, 9, 11, 12, 13, 18}
-	fmt.Println(binarySearchV1(7, arr), arr[4])                       // Idx: 4, Val: 7.
-	fmt.Println(binarySearchV2(7, arr), arr[4])                       // Idx: 4, Val: 7.
-	fmt.Println(binarySearchRecursive(7, 0, len(arr)-1, arr), arr[4]) // Idx: 4, Val: 7.
+	arr0 := []int{0, 2, 4, 5, 7, 9, 11, 12, 13, 18}
+	arr1 := []int{0, 2, 4, 7, 5, 9, 18, 11, 12, 13}
+	fmt.Println(binarySearchV1(7, arr0), arr0[4])                        // Idx: 4, Val: 7.
+	fmt.Println(binarySearchV2(7, arr0), arr0[4])                        // Idx: 4, Val: 7.
+	fmt.Println(binarySearchRecursive(7, 0, len(arr0)-1, arr0), arr0[4]) // Idx: 4, Val: 7.
+	fmt.Println(checkEquals(arr0, arr1))
 }

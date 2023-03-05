@@ -14,6 +14,14 @@ func convertToASCII(num int) {
 	convertToASCII(num - 1)
 }
 
+func greatestCommonDivisor(a, b int) int {
+	r := a % b
+	if r == 0 {
+		return b
+	}
+	return greatestCommonDivisor(b, r)
+}
+
 func main() {
 	convertToASCII(0x80)
 
@@ -22,4 +30,6 @@ func main() {
 	fmt.Println(sum)
 
 	fmt.Println(len(arr) == CountDAC(arr), len(arr) == CountElement(arr))
+
+	fmt.Println(greatestCommonDivisor(225, 125))
 }

@@ -75,4 +75,8 @@ func main() {
 	fmt.Println(binarySearchV2(7, arr0), arr0[4])                        // Idx: 4, Val: 7.
 	fmt.Println(binarySearchRecursive(7, 0, len(arr0)-1, arr0), arr0[4]) // Idx: 4, Val: 7.
 	fmt.Println(checkEquals(arr0, arr1))
+
+	str := "aabaabbbcvbv"
+	fmt.Println(mapUniqueChars(str))  // `map[97:[0 1 3 4] 98:[2 5 6 7 10] 99:[8] 118:[9 11]]`.
+	fmt.Println(detectPosUnique(str)) // 8.
 }

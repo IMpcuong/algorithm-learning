@@ -8,7 +8,6 @@ import "fmt"
 func binarySearchV1(num int, arr []int) int {
 	low := 0
 	high := len(arr) - 1
-
 	for low <= high {
 		mid := (low + high) / 2
 		guess := arr[mid]
@@ -26,7 +25,6 @@ func binarySearchV1(num int, arr []int) int {
 func binarySearchV2(num int, arr []int) int {
 	low := 0
 	high := len(arr) - 1
-
 	for low <= high {
 		mid := (low + high) / 2
 		guess := arr[mid]

@@ -45,12 +45,14 @@ func main() {
 	convertToASCII(0x80)
 
 	arr := []int{1, 2, 3, 4, 5}
-	sum := SumDAC(arr)
+	sum := sumDAC(arr)
 	fmt.Println(sum) // 15.
 
-	fmt.Println(len(arr) == CountDAC(arr), len(arr) == CountElement(arr))
+	fmt.Println(len(arr) == countDAC(arr), len(arr) == countElement(arr))
 
 	fmt.Println(greatestCommonDivisor(225, 125)) // 25.
 
 	fmt.Println(pow(-2, 10) == math.Pow(-2, 10)) // 1024.
+
+	fmt.Println(findMax(arr))
 }

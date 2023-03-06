@@ -44,15 +44,18 @@ func pow(x float64, n int) float64 {
 func main() {
 	convertToASCII(0x80)
 
-	arr := []int{1, 2, 3, 4, 5}
-	sum := sumDAC(arr)
+	arr0 := []int{1, 2, 3, 4, 5}
+	sum := sumDAC(arr0)
 	fmt.Println(sum) // 15.
 
-	fmt.Println(len(arr) == countDAC(arr), len(arr) == countElement(arr))
+	fmt.Println(len(arr0) == countDAC(arr0), len(arr0) == countElement(arr0))
 
 	fmt.Println(greatestCommonDivisor(225, 125)) // 25.
 
 	fmt.Println(pow(-2, 10) == math.Pow(-2, 10)) // 1024.
 
-	fmt.Println(findMax(arr))
+	fmt.Println(findMax(arr0))
+
+	arr1 := []int{7, 2, 24, 36, 9, 3, 1, 6, 7, 8, 4, 22, 12, 33, 38}
+	fmt.Println(findMaxDAC(0, len(arr1)-1, arr1))
 }

@@ -39,3 +39,26 @@ func findMax(arr []int) int {
 	}
 	return max
 }
+
+// NOTE: https://stackoverflow.com/questions/6878590/the-maximum-value-for-an-int-type-in-go
+
+func findMaxDAC(low, high int, arr []int) int {
+	// Array contains only one element.
+	if low == high {
+		return arr[low] & arr[high]
+	}
+	// Array contains only two elements.
+	if (high - low) == 1 {
+		if arr[low] < arr[high] {
+			return arr[high]
+		}
+		return arr[low]
+	}
+	mid := (low + high) / 2
+	maxRight := findMaxDAC(mid+1, high, arr)
+	maxLeft := findMaxDAC(low, mid-1, arr)
+	if maxLeft > maxRight {
+		return maxLeft
+	}
+	return maxRight
+}

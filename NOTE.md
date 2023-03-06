@@ -191,4 +191,11 @@ int main(void)
   - The constant is almost never matter for simple search versus binary search, because `O(log n)` is so much faster than `O(n)`
     when your list gets big.
 
-- Time: `Chapter 5: Hash Tables`; `73 (92 of 258)`.
+4. Hash tables:
+
+- Definition: A `hash-function` is a function where you put in a string and you get back a number.
+- Mathematics reflection: In mathematics, a function (injective function) is a procedure that maps a value from an infinite set with a correspondent value that belongs to another infinite set.
+
+- Arrays and lists map straight to the memory, but `hash-tables` are smarter (combination between: `hash-function + array`). They use a `hash-function` to intelligently figure out where to store elements.
+
+- Time: `Chapter 5: Hash Tables`; `84 (103 of 258)`.

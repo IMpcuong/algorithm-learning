@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 )
 
@@ -57,5 +58,10 @@ func main() {
 	fmt.Println(findMax(arr0))
 
 	arr1 := []int{7, 2, 24, 36, 9, 3, 1, 6, 7, 8, 4, 22, 12, 33, 38}
-	fmt.Println(findMaxDAC(0, len(arr1)-1, arr1))
+	fmt.Println(findMaxDAC(0, len(arr1)-1, arr1)) // 38.
+
+	arr2 := quickSort(arr1)
+	fmt.Println(arr2) // `[1 2 3 4 6 7 7 8 9 12 22 24 33 36 38]`.
+	sort.Ints(arr1)
+	fmt.Println(arr1) // `[1 2 3 4 6 7 7 8 9 12 22 24 33 36 38]`.
 }

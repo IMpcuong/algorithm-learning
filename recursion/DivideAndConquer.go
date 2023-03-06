@@ -62,3 +62,25 @@ func findMaxDAC(low, high int, arr []int) int {
 	}
 	return maxRight
 }
+
+func quickSort(arr []int) []int {
+	if len(arr) < 2 {
+		return arr
+	}
+	lesserArr := make([]int, 0, len(arr)-1)
+	greaterArr := make([]int, 0, len(arr)-1)
+	pivot := arr[0]
+	// NOTE: If we iterate from index zero, the pivot value will always be equal
+	// 		to the original array's first element. Hence, the lesser array will duplicate
+	//		the pivot value for each of the two indices.
+	for _, e := range arr[1:] {
+		if e <= pivot {
+			lesserArr = append(lesserArr, e)
+		} else {
+			greaterArr = append(greaterArr, e)
+		}
+	}
+	lesserArr = append(quickSort(lesserArr), pivot)
+	greaterArr = quickSort(greaterArr)
+	return append(lesserArr, greaterArr...)
+}

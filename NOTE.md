@@ -182,4 +182,13 @@ int main(void)
   - Step 1: Figure out simple case as the base case.
   - Step 2: Figure out how to reduce your problem and get to the base case (recursive case).
 
-- Time: `Chapter 4: Recursion`; `51 (70 of 258)`.
+- Final recap:
+
+  - `D&C` works by breaking problem down into smaller and smaller pieces. If you are using `D&C` on a list, the base case is
+    probably an empty array or an array with one elements.
+  - If you're implementing quick-sort, choose a random element as the pivot. The average runtime of quick-sort is `O(n * log n)`!
+  - The constant in BigO notation can matter some time. That's why quick-sort is faster than merge-sort.
+  - The constant is almost never matter for simple search versus binary search, because `O(log n)` is so much faster than `O(n)`
+    when your list gets big.
+
+- Time: `Chapter 5: Hash Tables`; `73 (92 of 258)`.

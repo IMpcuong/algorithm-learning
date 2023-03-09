@@ -198,4 +198,26 @@ int main(void)
 
 - Arrays and lists map straight to the memory, but `hash-tables` are smarter (combination between: `hash-function + array`). They use a `hash-function` to intelligently figure out where to store elements.
 
-- Time: `Chapter 5: Hash Tables`; `84 (103 of 258)`.
+- Recap for hashes:
+
+  - Speed up your looks up process.
+  - Modelling the relationship from one thing to another thing.
+  - Filtering out duplicates.
+  - Caching/memorizing data instead of making the server do all the work.
+
+- Collisions: To avoid key collisions, the implementation method must takes care of the two most important parts:
+
+  - Choosing the hash function wisely.
+  - Use a compound data structure such as hashmap + linked-list (not so sure).
+  - A low load factor := `Number of items in hash tables / Total number of slots`.
+    Once the load factor variant surpass `0.7`, it's time to resize your hash table.
+
+- Performance:
+
+  | Operation | Average Case | Worst Case |
+  | --------- | :----------: | :--------: |
+  | Search    |    `O(1)`    |   `O(n)`   |
+  | Insert    |    `O(1)`    |   `O(n)`   |
+  | Delete    |    `O(1)`    |   `O(n)`   |
+
+- Time: `Chapter 6: Breadth-first Search`; `99 (118 of 258)`.

@@ -15,16 +15,15 @@ func NewGraph() (g *Graph) {
 	return
 }
 
-func (g *Graph) AddVertexToRoot(v Node) *Graph {
+func (g *Graph) AddVertexToRoot(v Node) {
 	rootLabel := g.Root.Label
 	if rootLabel == v.Label {
-		return g
+		return
 	}
 	for _, rootChild := range g.Root.Adjacents[rootLabel] {
 		if rootChild.Label == v.Label {
-			return g
+			return
 		}
 	}
 	g.Root.Adjacents[v.Label] = v.Adjacents[v.Label]
-	return g
 }

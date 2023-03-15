@@ -77,4 +77,13 @@ func main() {
 	str := "aabaabbbcvbv"
 	fmt.Println(mapUniqueChars(str))  // `map[97:[0 1 3 4] 98:[2 5 6 7 10] 99:[8] 118:[9 11]]`.
 	fmt.Println(detectPosUnique(str)) // 8.
+
+	nakedGraph := NewGraph()
+	nakedGraph.AddVertexToRoot(
+		Node{
+			Label:     "dude0",
+			Adjacents: map[string][]Node{"dude0": {Node{"dude0.0", nil}, Node{"dude0.1", nil}}},
+		})
+	nakedGraph.AddVertexToRoot(Node{"dude1", make(map[string][]Node)})
+	fmt.Printf("%+v\n", nakedGraph)
 }

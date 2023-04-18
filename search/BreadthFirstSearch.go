@@ -1,29 +1,87 @@
 package main
 
-type Node struct {
-	Label     string
-	Adjacents map[string][]Node
+import (
+	"algorithm-learning/utils"
+	"fmt"
+)
+
+type Vertex struct {
+	label     int
+	adjacents []*Vertex
 }
 
 type Graph struct {
-	Root Node
+	vertices []*Vertex
 }
 
-func NewGraph() (g *Graph) {
-	adjacents := make(map[string][]Node, 0)
-	g = &Graph{Node{"root", adjacents}}
-	return
-}
-
-func (g *Graph) AddVertexToRoot(v Node) {
-	rootLabel := g.Root.Label
-	if rootLabel == v.Label {
-		return
-	}
-	for _, rootChild := range g.Root.Adjacents[rootLabel] {
-		if rootChild.Label == v.Label {
-			return
+func (g *Graph) existsVertexWith(label int) bool {
+	for _, v := range g.vertices {
+		if v.label == label {
+			return true
 		}
 	}
-	g.Root.Adjacents[v.Label] = v.Adjacents[v.Label]
+	return false
+}
+
+func (g *Graph) getVertexBy(label int) (*Vertex, error) {
+	if !g.existsVertexWith(label) {
+		return &Vertex{}, fmt.Errorf("ERROR: Vertex %d not found", label)
+	}
+	for i, v := range g.vertices {
+		if v.label == label {
+			return g.vertices[i], nil
+		}
+	}
+	return &Vertex{}, fmt.Errorf("ERROR: Vertex's label %d was out of bound", label)
+}
+
+func (g *Graph) AddVertex(label int) error {
+	if g.existsVertexWith(label) {
+		return fmt.Errorf("ERROR: Vertex %d already exists", label)
+	}
+	nextVertex := &Vertex{
+		label: label,
+	}
+	g.vertices = append(g.vertices, nextVertex)
+	return nil
+}
+
+func (g *Graph) AddEdge(srcLabel, destLabel int) error {
+	src, _ := g.getVertexBy(srcLabel)
+	dest, _ := g.getVertexBy(destLabel)
+	if dest == nil || src == nil || srcLabel == destLabel {
+		return fmt.Errorf("ERROR: Not a valid edge from [%d] --> [%d]", srcLabel, destLabel)
+	} else if utils.Contains(src.adjacents, dest) {
+		return fmt.Errorf("WARN: Edge from vertex [%d] --> [%d] already exists", srcLabel, destLabel)
+	}
+	src.adjacents = append(src.adjacents, dest)
+	return nil
+}
+
+func (g *Graph) Print() {
+	for _, vertex := range g.vertices {
+		fmt.Printf("Vertex[%d]:\n", vertex.label)
+		for _, v := range vertex.adjacents {
+			fmt.Printf("+ Adjacent's label: %d\n", v.label)
+		}
+		fmt.Println()
+	}
+}
+
+func exampleDirectedGraph() {
+	g := &Graph{}
+	g.AddVertex(1)
+	g.AddVertex(2)
+	g.AddVertex(3)
+
+	g.AddEdge(1, 2)
+	g.AddEdge(1, 3)
+
+	g.AddEdge(2, 1)
+	g.AddEdge(2, 3)
+
+	g.AddEdge(3, 1)
+	g.AddEdge(3, 2)
+
+	g.Print()
 }

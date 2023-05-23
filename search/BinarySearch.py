@@ -22,11 +22,13 @@ def bfs_seller(graph_neighbor: typing.Dict[str, typing.List[str]]) -> str:
     searched: typing.List[str] = []
     while search_queue:
         person = search_queue.popleft()
-        if person not in searched and is_seller(person):
-            return person
-        else:
-            search_queue += graph_neighbor[person]
-            searched.append(person)
+        pprint.pprint(person)
+        if person not in searched:
+            if is_seller(person):
+                return person
+            else:
+                search_queue += graph_neighbor[person]
+                searched.append(person)
     return str.__init__
 
 

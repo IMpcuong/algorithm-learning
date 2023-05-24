@@ -221,3 +221,22 @@ int main(void)
   | Delete    |    `O(1)`    |   `O(n)`   |
 
 - Time: `Chapter 6: Breadth-first Search`; `99 (118 of 258)`.
+
+5. Breath-first search:
+
+- Recap for BFS:
+
+  - BFS tells you if there's ac path from A to B.
+  - If there's path, BFS will find the shortest path.
+  - If you have a problem like "find the shortest X", try modeling your problem as a graph,
+    and use BFS to solve.
+  - A directed graph has arrows, and the relationship follows the direction of arrow
+    (A -> B means "A owes B money").
+  - Undirected graph don't have arrows, the relationship goes both ways
+    (Joey - Phoebe means "Joey dated Phoebe and Phoebe dated Joey").
+  - Queues are FIFO (First In, First Out).
+  - Stacks are LIFO (Last In, First Out).
+  - You need to check people in the order they were added to the search list, so the search list needs to be a queue.
+    Otherwise, you won't get the shortest path.
+  - Once you check someone, mark them as a tainted person and do not repeat to check them again.
+    Otherwise, you might end up in an infinite loop.

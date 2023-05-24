@@ -2,5 +2,8 @@
   "cSpell.words": [
     "nums"
   ],
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "files.associations": {
+    "cstdlib": "c"
+  }
 }

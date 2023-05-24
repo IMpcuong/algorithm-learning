@@ -59,6 +59,26 @@ def find_lowest_cost_node(
     return lowest_cost_node
 
 
+def bfs_graph(
+    weighted_graph: typing.Dict[str, typing.Dict[str, int]],
+    cost_graph: typing.Dict[str, int],
+    parent_graph: typing.Dict[str, str],
+    processed_nodes: typing.List[str] = [],
+) -> None:
+    node = find_lowest_cost_node(cost_graph, processed=processed_nodes)
+    while node is not None:
+        cost = cost_graph[node]
+        neighbors = weighted_graph[node]
+        for k in neighbors.keys():
+            new_cost = cost + neighbors[k]
+            if cost_graph[k] > new_cost:
+                cost_graph[k] = new_cost
+                parent_graph[k] = node
+        processed_nodes.append(node)
+        node = find_lowest_cost_node(cost_graph, processed=processed_nodes)
+        pprint.pprint(node)
+
+
 if __name__ == "__main__":
     seller = bfs_seller(init_graph())
     pprint.pprint("Seller: " + seller)
@@ -87,11 +107,11 @@ if __name__ == "__main__":
     collectMapKeyFn = weighted_graph["start"].keys
     pprint.pprint(collectMapKeyFn())
 
-    costs_graph = {}
-    costs_graph["a"] = 6
-    costs_graph["b"] = 2
-    costs_graph["fin"] = float("inf")
-    pprint.pprint(costs_graph)
+    cost_graph = {}
+    cost_graph["a"] = 6
+    cost_graph["b"] = 2
+    cost_graph["fin"] = float("inf")
+    pprint.pprint(cost_graph)
 
     parent_graph = {}
     parent_graph["a"] = "start"
@@ -100,19 +120,13 @@ if __name__ == "__main__":
     pprint.pprint(parent_graph)
 
     processed_nodes = []
-    node = find_lowest_cost_node(costs_graph, processed=processed_nodes)
-    pprint.pprint(node)
-    while node is not None:
-        cost = costs_graph[node]
-        neighbors = weighted_graph[node]
-        for k in neighbors.keys():
-            new_cost = cost + neighbors[k]
-            if costs_graph[k] > new_cost:
-                costs_graph[k] = new_cost
-                parent_graph[k] = node
-        processed_nodes.append(node)
-        node = find_lowest_cost_node(costs_graph, processed=processed_nodes)
-        pprint.pprint(node)
+    bfs_graph(
+        weighted_graph=weighted_graph,
+        cost_graph=cost_graph,
+        parent_graph=parent_graph,
+        processed_nodes=processed_nodes,
+    )
 
+    pprint.pprint(processed_nodes)
     pprint.pprint(parent_graph)
-    pprint.pprint(costs_graph)
+    pprint.pprint(cost_graph)

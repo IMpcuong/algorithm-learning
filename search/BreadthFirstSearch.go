@@ -3,6 +3,7 @@ package main
 import (
 	"algorithm-learning/utils"
 	"fmt"
+	"math"
 )
 
 type Vertex struct {
@@ -92,4 +93,103 @@ func exampleDirectedGraph() {
 	g.AddEdge(4, 8)
 
 	g.Print()
+}
+
+func bfsWithFixedData() {
+	weightedGraph := make(map[string]map[string]int)
+	weightedGraph["start"] = map[string]int{}
+	// weightedGraph["start"]["a"] = 6
+	// weightedGraph["start"]["b"] = 2
+
+	// Exp2:
+	weightedGraph["start"]["a"] = 5
+	weightedGraph["start"]["b"] = 2
+
+	weightedGraph["a"] = map[string]int{}
+	// weightedGraph["a"]["fin"] = 1
+
+	// Exp2:
+	weightedGraph["a"]["c"] = 4
+	weightedGraph["a"]["d"] = 2
+
+	weightedGraph["b"] = map[string]int{}
+	// weightedGraph["b"]["a"] = 3
+	// weightedGraph["b"]["fin"] = 5
+
+	// Exp2:
+	weightedGraph["b"]["a"] = 8
+	weightedGraph["b"]["d"] = 7
+
+	weightedGraph["c"] = map[string]int{}
+	weightedGraph["c"]["d"] = 6
+	weightedGraph["c"]["fin"] = 3
+
+	weightedGraph["d"] = map[string]int{}
+	weightedGraph["d"]["fin"] = 1
+
+	weightedGraph["fin"] = map[string]int{}
+
+	costGraph := make(map[string]int)
+	// costGraph["a"] = 6
+	// costGraph["b"] = 2
+	// costGraph["fin"] = math.MaxInt
+
+	// Exp2:
+	costGraph["a"] = 5
+	costGraph["b"] = 2
+	costGraph["c"] = math.MaxInt
+	costGraph["d"] = math.MaxInt
+	costGraph["fin"] = math.MaxInt
+
+	parentGraph := make(map[string]string)
+	// parentGraph["a"] = "start"
+	// parentGraph["b"] = "start"
+	// parentGraph["fin"] = ""
+
+	// Exp2:
+	parentGraph["a"] = "start"
+	parentGraph["b"] = "start"
+	parentGraph["c"] = ""
+	parentGraph["d"] = ""
+	parentGraph["fin"] = ""
+
+	findLowestCostNode := func(costGraph map[string]int, processed []string) string {
+		lowestCost := math.MaxInt
+		lowestCostNode := ""
+		for nodeName, cost := range costGraph {
+			isNotExist := func(list []string, v string) bool {
+				for _, n := range list {
+					if n == v {
+						return false
+					}
+				}
+				return true
+			}(processed, nodeName)
+			if lowestCost > cost && isNotExist {
+				lowestCost = cost
+				lowestCostNode = nodeName
+			}
+		}
+		fmt.Println(lowestCostNode)
+		return lowestCostNode
+	}
+
+	processedNode := make([]string, 0, len(weightedGraph)-1)
+	curNodeName := findLowestCostNode(costGraph, processedNode)
+	for curNodeName != "" {
+		cost := costGraph[curNodeName]
+		neighbors := weightedGraph[curNodeName]
+		for neighborName := range neighbors {
+			newCost := cost + neighbors[neighborName]
+			if costGraph[neighborName] > newCost {
+				costGraph[neighborName] = newCost
+				parentGraph[neighborName] = curNodeName
+			}
+		}
+		processedNode = append(processedNode, curNodeName)
+		curNodeName = findLowestCostNode(costGraph, processedNode)
+	}
+
+	fmt.Println(parentGraph)
+	fmt.Println(costGraph)
 }

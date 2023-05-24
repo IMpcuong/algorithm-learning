@@ -79,4 +79,6 @@ func main() {
 	fmt.Println(detectPosUnique(str)) // 8.
 
 	exampleDirectedGraph()
+
+	bfsWithFixedData()
 }

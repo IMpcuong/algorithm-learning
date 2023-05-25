@@ -6,6 +6,8 @@ import (
 	"math"
 )
 
+import "C"
+
 type Vertex struct {
 	label     int
 	adjacents []*Vertex

@@ -15,13 +15,11 @@ func countDAC[number int | uint | float64](arr []number) number {
 }
 
 func countElement[number int | uint | float64](arr []number) number {
-	var counter number = 0
-	for i := range arr {
-		if &arr[i] != nil {
-			counter++
-		}
+	counter := 0
+	for range arr {
+		counter++
 	}
-	return counter
+	return number(counter)
 }
 
 func findMax(arr []int) int {

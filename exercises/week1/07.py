@@ -14,16 +14,14 @@ correct_pass: str = input()
 
 best, worst = 0, 0
 pwd_len = len(correct_pass)
-for i in range(1, pwd_len + 1):
+for i in range(0, pwd_len):
     if i not in len_freq_map:
         len_freq_map[i] = 0
     if i < pwd_len:
         best += len_freq_map[i]
-    if i == pwd_len:
-        best += 1
-    worst += len_freq_map[i]
 
-print(best, worst)
+worst = best + len_freq_map[pwd_len] - 1
+
 best += 5 * (best // max_failures)
 worst += 5 * (worst // max_failures)
-print(best, worst, sep=" ")
+print(best + 1, worst + 1, sep=" ")
